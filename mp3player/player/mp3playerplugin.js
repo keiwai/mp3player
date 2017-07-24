@@ -585,9 +585,11 @@ jQuery(document).ready(function($){
 		}
 		this.playSong = function(){
 			this.object[0].play();
+			updateWindowTitle('Playing');
 		};
 		this.pauseSong = function(){
 			this.object[0].pause();
+			updateWindowTitle('Paused');
 		};
 		this.nextSong = function(){
 			if(currentSong != (this.totalSongs - 1)){
@@ -605,6 +607,11 @@ jQuery(document).ready(function($){
 	
 	// End class definitions
 	// Begin functions
+
+	function updateWindowTitle(s){
+		var trackNo = currentSong+1;
+		document.title='Now Playing #'+trackNo+' '+playlist.songs[currentSong].title+' - '+playlist.songs[currentSong].artist;
+	}
 
 	function resetOrder(){
 		var table = playlist.table;
@@ -724,6 +731,7 @@ jQuery(document).ready(function($){
 				player.object[0].currentTime = (ui.value/100)*(player.object[0].duration);
 			}
 		});
+
 
 		// define events on controls
 		play.click(function(){
