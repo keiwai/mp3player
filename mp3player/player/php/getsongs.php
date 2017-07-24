@@ -71,6 +71,7 @@ $totalCols = 0;
 	</colgroup>
 	<thead>
 		<tr class="heading">
+				<th>#</th>
 			<?php if($title == 'true'){ ?>
 				<th>Title</th>
 			<?php } ?>
@@ -114,12 +115,14 @@ $totalCols = 0;
 				$ThisFileInfo = $getID3->analyze($FullFileName);
 				getid3_lib::CopyTagsToComments($ThisFileInfo);
 				echo '<tr data-file="'.$ThisFileInfo['filename'].'">';
+				// Add #
+				echo '<td class="tracknum">'.$totalAudio.'</td>';
 				if($title == 'true'){
 					if($audioType == "mp3"){
 						if($ThisFileInfo['comments_html']['title']){
 							echo '<td class="title">'.$ThisFileInfo['comments_html']['title'][(count($ThisFileInfo['comments_html']['title'])-1)].'</td>';
 						} else {
-							echo '<td class="title">Unknown Song</td>';
+							echo '<td class="title">'.$ThisFileInfo['filename'].'</td>';
 						}
 					} else {
 						echo '<td class="title">'.$ThisFileInfo['filename'].'</td>';
@@ -129,14 +132,14 @@ $totalCols = 0;
 					if($ThisFileInfo['comments_html']['artist']){
 						echo '<td class="artist">'.$ThisFileInfo['comments_html']['artist'][(count($ThisFileInfo['comments_html']['artist'])-1)].'</td>';
 					} else {
-						echo '<td class="artist">Unknown Artist</td>';
+						echo '<td class="artist"> - </td>';
 					}
 				}
 				if($album == 'true'){	
 					if($ThisFileInfo['comments_html']['album']){
 						echo '<td class="album">'.$ThisFileInfo['comments_html']['album'][(count($ThisFileInfo['comments_html']['album'])-1)].'</td>';
 					} else {
-						echo '<td class="album">Unknown Album</td>';
+						echo '<td class="album"> - </td>';
 					}
 				}
 				if($length == 'true'){
@@ -146,21 +149,21 @@ $totalCols = 0;
 					if($ThisFileInfo['comments_html']['track']){
 						echo '<td class="track">'.$ThisFileInfo['comments_html']['track'][(count($ThisFileInfo['comments_html']['track'])-1)].'</td>';
 					} else {
-						echo '<td class="track"></td>';
+						echo '<td class="track"> - </td>';
 					}
 				}
 				if($genre == 'true'){				
 					if($ThisFileInfo['comments_html']['genre']){
 						echo '<td class="genre">'.$ThisFileInfo['comments_html']['genre'][(count($ThisFileInfo['comments_html']['genre'])-1)].'</td>';
 					} else {
-						echo '<td class="genre"></td>';
+						echo '<td class="genre"> - </td>';
 					}
 				}
 				if($year == 'true'){				
 					if($ThisFileInfo['comments_html']['year']){
 						echo '<td class="year">'.$ThisFileInfo['comments_html']['year'][(count($ThisFileInfo['comments_html']['year'])-1)].'</td>';
 					} else {
-						echo '<td class="year"></td>';
+						echo '<td class="year"> - </td>';
 					}
 				}
 				echo '</tr>';
